@@ -45,6 +45,14 @@ julia> include("src/Benchmark.jl")
   796.325 μs (26 allocations: 769.47 KiB)
 ```
 
+From the `python` directory:
+
+```console
+$ poetry install
+$ poetry run python benchmark.py
+25150.930999999986 μs
+```
+
 ## Disclaimer
 
 I am neither a C++ nor Julia expert. Please let me know if I biased the results

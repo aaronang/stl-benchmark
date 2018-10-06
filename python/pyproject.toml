@@ -1,0 +1,8 @@
+[tool.poetry]
+name = "stl"
+version = "0.1.0"
+description = ""
+authors = ["Aaron Ang <awz.ang@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.7.0"
