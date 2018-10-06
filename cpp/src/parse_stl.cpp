@@ -28,14 +28,14 @@
 
 namespace stl {
 
-    float parse_float(std::ifstream &s) {
+    inline float parse_float(std::ifstream &s) {
         char buffer[sizeof(float)];
         s.read(buffer, 4);
         auto *fptr = (float *) buffer;
         return *fptr;
     }
 
-    point parse_point(std::ifstream &s) {
+    inline point parse_point(std::ifstream &s) {
         float x = parse_float(s);
         float y = parse_float(s);
         float z = parse_float(s);
