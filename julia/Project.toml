@@ -1,0 +1,7 @@
+name = "benchmark"
+uuid = "9e249880-c90e-11e8-2d47-e555437a47df"
+authors = ["Aaron Ang <awz.ang@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
