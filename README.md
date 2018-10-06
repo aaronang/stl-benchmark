@@ -41,3 +41,8 @@ julia> include("src/Benchmark.jl")
   815.896 μs (26 allocations: 769.47 KiB)
 Main.Benchmark
 ```
+
+## Disclaimer
+
+I am neither a C++ nor Julia expert. Please let me know if I biased the results
+by implementing something obviously inefficiently.
