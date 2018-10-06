@@ -28,20 +28,6 @@
 
 namespace stl {
 
-    float parse_float(std::ifstream &s) {
-        char buffer[sizeof(float)];
-        s.read(buffer, 4);
-        auto *fptr = (float *) buffer;
-        return *fptr;
-    }
-
-    point parse_point(std::ifstream &s) {
-        float x = parse_float(s);
-        float y = parse_float(s);
-        float z = parse_float(s);
-        return {x, y, z};
-    }
-
     std::vector<triangle> parse_stl(const std::string &stl_path) {
         std::ifstream stl_file(stl_path.c_str(), std::ios::in | std::ios::binary);
 
@@ -58,11 +44,13 @@ namespace stl {
         triangles.reserve(num_triangles);
 
         for (unsigned int i = 0; i < num_triangles; i++) {
-            auto normal = parse_point(stl_file);
-            auto v1 = parse_point(stl_file);
-            auto v2 = parse_point(stl_file);
-            auto v3 = parse_point(stl_file);
-            triangles.emplace_back(triangle(normal, v1, v2, v3));
+            float fs[12];
+            stl_file.read((char *) fs, 48);
+            point normal{fs[0], fs[1], fs[2]};
+            point v1{fs[3], fs[4], fs[5]};
+            point v2{fs[6], fs[7], fs[8]};
+            point v3{fs[9], fs[10], fs[11]};
+            triangles.emplace_back(normal, v1, v2, v3);
 
             // skip attribute byte count
             char dummy[2];

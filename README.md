@@ -20,7 +20,7 @@ $ cd build
 $ cmake -DCMAKE_BUILD_TYPE=Release ..
 $ make -j
 $ ./stl_benchmark
-2018-10-05 22:44:31
+2018-10-06 12:35:31
 Running ./stl_benchmark
 Run on (8 X 2300 MHz CPU s)
 CPU Caches:
@@ -31,19 +31,18 @@ CPU Caches:
 --------------------------------------------------
 Benchmark           Time           CPU Iterations
 --------------------------------------------------
-ParseStl      1775819 ns    1747459 ns        374
+ParseStl       429234 ns     409210 ns       1729
 ```
 
 From the `julia` directory:
 
 ```console
-$ julia
+$ julia -O3
 julia> ]
 (v1.0) pkg> activate .
 (benchmark) pkg> ^C
 julia> include("src/Benchmark.jl")
-  815.896 μs (26 allocations: 769.47 KiB)
-Main.Benchmark
+  796.325 μs (26 allocations: 769.47 KiB)
 ```
 
 ## Disclaimer
