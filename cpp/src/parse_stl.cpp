@@ -3,10 +3,11 @@
 #include "parse_stl.h"
 
 namespace stl {
+
     float parse_float(std::ifstream &s) {
-        char f_buf[sizeof(float)];
-        s.read(f_buf, 4);
-        auto *fptr = (float *) f_buf;
+        char buffer[sizeof(float)];
+        s.read(buffer, 4);
+        auto *fptr = (float *) buffer;
         return *fptr;
     }
 
@@ -30,6 +31,7 @@ namespace stl {
         unsigned int num_triangles = *r;
 
         std::vector<triangle> triangles;
+        triangles.reserve(num_triangles);
 
         for (unsigned int i = 0; i < num_triangles; i++) {
             auto normal = parse_point(stl_file);
