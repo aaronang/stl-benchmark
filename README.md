@@ -11,6 +11,8 @@ $ git clone --recurse-submodules git@github.com:aaronang/stl-benchmark.git
 From the `cpp` directory:
 
 ```console
+$ export CC=/usr/bin/clang
+$ export CXX=/usr/bin/clang++
 $ mkdir build
 $ cd build
 $ cmake -DCMAKE_BUILD_TYPE=Release ..
@@ -27,7 +29,7 @@ CPU Caches:
 --------------------------------------------------
 Benchmark           Time           CPU Iterations
 --------------------------------------------------
-ParseStl      1857063 ns    1830176 ns        374
+ParseStl      1775819 ns    1747459 ns        374
 ```
 
 From the `julia` directory:
