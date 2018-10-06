@@ -2,6 +2,8 @@
 
 STL benchmark comparing C++ and Julia ⏱
 
+For more information: [STL Benchmark Comparison: C++ vs. Julia](https://aaronang.github.io/2018/stl-benchmark-comparison-cpp-vs-julia/).
+
 ## Getting Started
 
 ```console
