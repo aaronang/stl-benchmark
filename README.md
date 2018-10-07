@@ -42,7 +42,7 @@ julia> ]
 (v1.0) pkg> activate .
 (benchmark) pkg> ^C
 julia> include("src/Benchmark.jl")
-  796.325 μs (26 allocations: 769.47 KiB)
+  735.813 μs (6 allocations: 346.95 KiB)
 ```
 
 From the `python` directory:
