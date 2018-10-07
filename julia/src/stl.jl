@@ -1,7 +1,12 @@
 module STL
 
-Vertex = Tuple{Float32, Float32, Float32}
-Normal = Vertex
+struct Vertex
+    x::Float32
+    y::Float32
+    z::Float32
+end
+
+const Normal = Vertex
 
 struct Triangle
     normal::Normal
@@ -11,27 +16,25 @@ struct Triangle
 end
 
 function parse(path::AbstractString)
-    triangles = Array{Triangle, 1}()
-
     open(path) do stl
         skip(stl, 80)  # skip header
 
         trianglecount = read(stl, UInt32)
+        triangles = Array{Triangle, 1}(undef, trianglecount)
 
-        for _ in 1:trianglecount
-            normal = read(stl, Float32), read(stl, Float32), read(stl, Float32)
-            v1 = read(stl, Float32), read(stl, Float32), read(stl, Float32)
-            v2 = read(stl, Float32), read(stl, Float32), read(stl, Float32)
-            v3 = read(stl, Float32), read(stl, Float32), read(stl, Float32)
-            push!(triangles, Triangle(normal, v1, v2, v3))
+        for i in 1:trianglecount
+            normal = Normal(read(stl, Float32), read(stl, Float32), read(stl, Float32))
+            v1 = Vertex(read(stl, Float32), read(stl, Float32), read(stl, Float32))
+            v2 = Vertex(read(stl, Float32), read(stl, Float32), read(stl, Float32))
+            v3 = Vertex(read(stl, Float32), read(stl, Float32), read(stl, Float32))
+            triangles[i] = Triangle(normal, v1, v2, v3)
 
             skip(stl, 2)  # skip attribute byte count
         end
 
         @assert eof(stl)
+        return triangles
     end
-
-    triangles
 end
 
 export parse
