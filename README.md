@@ -41,17 +41,20 @@ $ julia -O3
 julia> ]
 (v1.0) pkg> activate .
 (benchmark) pkg> ^C
-julia> include("src/Benchmark.jl")
+julia> using BenchmarkTools
+julia> include("stl.jl")
+julia> @btime STL.parse("nist.stl")
   735.813 μs (6 allocations: 346.95 KiB)
 ```
 
 From the `python` directory:
 
 ```console
-$ poetry install
-$ poetry run python benchmark.py
+$ python benchmark.py
 25150.930999999986 μs
 ```
+
+> Note: Python 3.7.0 is required.
 
 ## Disclaimer
 
