@@ -21,7 +21,8 @@ function parse(path::AbstractString)
         trianglecount = read(stl, UInt32)
         ref = Ref{Triangle}()
         triangles = map(1:trianglecount) do i
-            read!(stl, ref); skip(stl, 2)  # skip attribute byte count
+            read!(stl, ref);
+            skip(stl, 2)  # skip attribute byte count
             ref[]
         end
         @assert eof(stl)
