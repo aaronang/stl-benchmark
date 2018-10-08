@@ -44,7 +44,7 @@ julia> ]
 julia> using BenchmarkTools
 julia> include("stl.jl")
 julia> @btime STL.parse("nist.stl")
-  735.813 μs (6 allocations: 346.95 KiB)
+  211.641 μs (9 allocations: 347.06 KiB)
 ```
 
 From the `python` directory:
@@ -55,6 +55,14 @@ $ python benchmark.py
 ```
 
 > Note: Python 3.7.0 is required.
+
+## Results
+
+| Language | Time       |
+|----------|------------|
+| C++      | 409.210 μs |
+| Julia    | 211.641 μs |
+| Python   | 25150.9 μs |
 
 ## Disclaimer
 
