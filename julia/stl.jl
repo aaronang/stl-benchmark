@@ -16,7 +16,7 @@ struct Triangle
 end
 
 function parse(path::AbstractString)
-    open(path) do stl
+    open(path;lock=false) do stl
         skip(stl, 80)  # skip header
         trianglecount = read(stl, UInt32)
         ref = Ref{Triangle}()
