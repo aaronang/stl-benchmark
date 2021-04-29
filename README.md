@@ -39,12 +39,12 @@ From the `julia` directory:
 ```console
 $ julia -O3
 julia> ]
-(v1.0) pkg> activate .
-(benchmark) pkg> ^C
+(v1.0) pkg> add BenchmarkTools
+(v1.0) pkg> *press backspace*
 julia> using BenchmarkTools
 julia> include("stl.jl")
 julia> @btime STL.parse("nist.stl")
-  211.641 μs (9 allocations: 347.06 KiB)
+  140.942 μs (14 allocations: 347.30 KiB)
 ```
 
 From the `python` directory:
