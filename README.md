@@ -7,7 +7,7 @@ For more information: [STL Benchmark Comparison: C++ vs. Julia](https://aaronang
 ## Getting Started
 
 ```console
-$ git clone --recurse-submodules git@github.com:aaronang/stl-benchmark.git
+$ git clone --recurse-submodules git@github.com:XInvisib1eX/stl-benchmark.git
 ```
 
 From the `cpp` directory:
