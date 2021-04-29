@@ -39,8 +39,8 @@ From the `julia` directory:
 ```console
 $ julia -O3
 julia> ]
-(v1.0) pkg> add BenchmarkTools
-(v1.0) pkg> *press backspace*
+(v1.5) pkg> add BenchmarkTools
+(v1.5) pkg> *press backspace*
 julia> using BenchmarkTools
 julia> include("stl.jl")
 julia> @btime STL.parse("nist.stl")
