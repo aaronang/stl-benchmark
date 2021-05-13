@@ -7,19 +7,24 @@ For more information: [STL Benchmark Comparison: C++ vs. Julia](https://aaronang
 ## Getting Started
 
 ```console
-$ git clone --recurse-submodules git@github.com:XInvisib1eX/stl-benchmark.git
+git clone --recurse-submodules git@github.com:XInvisib1eX/stl-benchmark.git
 ```
 
 From the `cpp` directory:
 
 ```console
-$ export CC=/usr/bin/clang
-$ export CXX=/usr/bin/clang++
-$ mkdir build
-$ cd build
-$ cmake -DCMAKE_BUILD_TYPE=Release ..
-$ make -j
-$ ./stl_benchmark
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+make -j
+./stl_benchmark
+```
+
+Sample output
+
+```console
 2018-10-06 12:35:31
 Running ./stl_benchmark
 Run on (8 X 2300 MHz CPU s)
