@@ -15,18 +15,19 @@ struct Triangle
     v3::Vertex
 end
 
-function parse(path::AbstractString)
-    open(path) do stl
-        skip(stl, 80)  # skip header
-        trianglecount = read(stl, UInt32)
-        ref = Ref{Triangle}()
-        triangles = map(1:trianglecount) do i
-            read!(stl, ref)
-            skip(stl, 2)  # skip attribute byte count
-            ref[]
+function parse(path)
+    open(path; lock = false) do io
+    	skip(io, 80) # skip header 
+	triangle_count = read(io, UInt32)
+    	triangles = Vector{Triangle}(undef, triangle_count) # preallocate memory for triangles 
+    	dest = Base.unsafe_convert(Ptr{Triangle}, triangles) # destination pointer
+    	unsafe_read(io, dest, sizeof(Triangle)) # copying first triangle
+        for _ in 2:triangle_count
+	    skip(io, 2)
+	    dest += 48 # moving to the next trianlge in dest
+	    unsafe_read(io, dest, sizeof(Triangle))
         end
-        @assert eof(stl)
-        return triangles
+    	triangles
     end
 end
 
