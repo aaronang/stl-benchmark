@@ -25,18 +25,17 @@ make -j
 Sample output
 
 ```console
-2018-10-06 12:35:31
 Running ./stl_benchmark
-Run on (8 X 2300 MHz CPU s)
+Run on (12 X 4500 MHz CPU s)
 CPU Caches:
-  L1 Data 32K (x4)
-  L1 Instruction 32K (x4)
-  L2 Unified 262K (x4)
-  L3 Unified 6291K (x1)
+  L1 Data 32K (x6)
+  L1 Instruction 32K (x6)
+  L2 Unified 256K (x6)
+  L3 Unified 12288K (x1)
 --------------------------------------------------
 Benchmark           Time           CPU Iterations
 --------------------------------------------------
-ParseStl       233049 ns     233047 ns       2960
+ParseStl       237056 ns     236744 ns       2912
 ```
 
 From the `julia` directory:
@@ -65,6 +64,6 @@ $ python benchmark.py
 
 | Language | Time       |
 |----------|------------|
-| C++      | 233.049 μs |
+| C++      | 237.056 μs |
 | Julia    | 110.646 μs |
 | Python   | 25150.9 μs |
