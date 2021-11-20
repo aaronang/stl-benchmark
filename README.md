@@ -36,7 +36,7 @@ CPU Caches:
 --------------------------------------------------
 Benchmark           Time           CPU Iterations
 --------------------------------------------------
-ParseStl       429234 ns     409210 ns       1729
+ParseStl       233049 ns     233047 ns       2960
 ```
 
 From the `julia` directory:
@@ -64,6 +64,6 @@ $ python benchmark.py
 
 | Language | Time       |
 |----------|------------|
-| C++      | 409.210 μs |
+| C++      | 233.049 μs |
 | Julia    | 110.646 μs |
 | Python   | 25150.9 μs |
