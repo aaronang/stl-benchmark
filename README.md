@@ -55,7 +55,7 @@ From the `python` directory:
 
 ```console
 $ python benchmark.py
-25150.930999999986 μs
+13513.513993530069 μs μs
 ```
 
 > Note: Python 3.7.0 is required.
@@ -66,4 +66,4 @@ $ python benchmark.py
 |----------|------------|
 | C++      | 237.056 μs |
 | Julia    | 110.646 μs |
-| Python   | 25150.9 μs |
+| Python   | 13513.5 μs |
