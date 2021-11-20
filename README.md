@@ -44,12 +44,11 @@ From the `julia` directory:
 ```console
 $ julia -O3
 julia> ]
-(v1.5) pkg> add BenchmarkTools
-(v1.5) pkg> *press backspace*
+(v1.6) pkg> add BenchmarkTools
 julia> using BenchmarkTools
 julia> include("stl.jl")
-julia> @btime STL.parse("nist.stl")
-  140.942 μs (14 allocations: 347.30 KiB)
+julia> @btime parse_to_stack("nist.stl")
+  110.646 μs (14 allocations: 347.30 KiB)
 ```
 
 From the `python` directory:
@@ -66,10 +65,5 @@ $ python benchmark.py
 | Language | Time       |
 |----------|------------|
 | C++      | 409.210 μs |
-| Julia    | 211.641 μs |
+| Julia    | 110.646 μs |
 | Python   | 25150.9 μs |
-
-## Disclaimer
-
-I am neither a C++ nor Julia expert. Please let me know if I biased the results
-by implementing something obviously inefficiently.
