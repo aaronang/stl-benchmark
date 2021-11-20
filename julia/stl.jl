@@ -1,5 +1,7 @@
 module STL
 
+export parse_to_stack, parse_to_heap
+
 struct Vertex
     x::Float32
     y::Float32
@@ -15,22 +17,36 @@ struct Triangle
     v3::Vertex
 end
 
-function parse(path)
+function parse_to_stack(path)
     open(path; lock = false) do io
     	skip(io, 80) # skip header 
-	triangle_count = read(io, UInt32)
+        triangle_count = read(io, UInt32)
     	triangles = Vector{Triangle}(undef, triangle_count) # preallocate memory for triangles 
     	dest = Base.unsafe_convert(Ptr{Triangle}, triangles) # destination pointer
     	unsafe_read(io, dest, sizeof(Triangle)) # copying first triangle
         for _ in 2:triangle_count
-	    skip(io, 2)
-	    dest += 48 # moving to the next trianlge in dest
-	    unsafe_read(io, dest, sizeof(Triangle))
+            skip(io, 2)
+            dest += 48 # moving to the next trianlge in dest
+            unsafe_read(io, dest, sizeof(Triangle))
         end
-    	triangles
+        triangles
     end
 end
 
-export parse
+function parse_to_heap(path)
+    open(path; lock = false) do io
+        skip(io, 80)
+        triangle_count = read(io, UInt32)
+        triangles = convert(Ptr{Triangle}, Base.Libc.malloc(48triangle_count))
+        dest = triangles
+        unsafe_read(io, dest, sizeof(Triangle)) # copying first triangle
+        for _ in 2:triangle_count
+            skip(io, 2)
+            dest += 48 # moving to the next trianlge in dest
+            unsafe_read(io, dest, sizeof(Triangle))
+        end
+        Base.unsafe_wrap(Array, triangles, triangle_count; own = true)
+    end
+end
 
-end # module
+end #module STL
