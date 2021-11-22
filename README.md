@@ -46,8 +46,7 @@ julia> ]
 (v1.6) pkg> add BenchmarkTools
 julia> using BenchmarkTools
 julia> include("stl.jl")
-julia> using Main.STL
-julia> @btime parse("nist.stl")
+julia> @btime STL.parse("nist.stl")
   110.646 μs (14 allocations: 347.30 KiB)
 ```
 
