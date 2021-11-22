@@ -26,7 +26,7 @@ function parse(path)
     	unsafe_read(io, dest, sizeof(Triangle)) # copying first triangle
         for _ in 2:triangle_count
             skip(io, 2)
-            dest += 48 # moving to the next trianlge in dest
+            dest += sizeof(Triangle) # moving to the next trianlge in dest
             unsafe_read(io, dest, sizeof(Triangle))
         end
         triangles
@@ -42,7 +42,7 @@ function parse_malloc(path)
         unsafe_read(io, dest, sizeof(Triangle)) # copying first triangle
         for _ in 2:triangle_count
             skip(io, 2)
-            dest += 48 # moving to the next trianlge in dest
+            dest += sizeof(Triangle) # moving to the next trianlge in dest
             unsafe_read(io, dest, sizeof(Triangle))
         end
         Base.unsafe_wrap(Array, triangles, triangle_count; own = true)
