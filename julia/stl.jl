@@ -1,6 +1,6 @@
 module STL
 
-export parse_to_stack, parse_to_heap
+export parse, parse_malloc
 
 struct Vertex
     x::Float32
@@ -17,7 +17,7 @@ struct Triangle
     v3::Vertex
 end
 
-function parse_to_stack(path)
+function parse(path)
     open(path; lock = false) do io
     	skip(io, 80) # skip header 
         triangle_count = read(io, UInt32)
@@ -33,7 +33,7 @@ function parse_to_stack(path)
     end
 end
 
-function parse_to_heap(path)
+function parse_malloc(path)
     open(path; lock = false) do io
         skip(io, 80)
         triangle_count = read(io, UInt32)
