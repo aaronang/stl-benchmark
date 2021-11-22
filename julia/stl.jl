@@ -37,7 +37,7 @@ function parse_malloc(path)
     open(path; lock = false) do io
         skip(io, 80)
         triangle_count = read(io, UInt32)
-        triangles = convert(Ptr{Triangle}, Base.Libc.malloc(48triangle_count))
+        triangles = convert(Ptr{Triangle}, Base.Libc.malloc(sizeof(Triangle)*triangle_count))
         dest = triangles
         unsafe_read(io, dest, sizeof(Triangle)) # copying first triangle
         for _ in 2:triangle_count
