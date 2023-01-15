@@ -7,7 +7,7 @@ For more information: [STL Benchmark Comparison: C++ vs. Julia](https://aaronang
 ## Getting Started
 
 ```console
-git clone --recurse-submodules git@github.com:XInvisib1eX/stl-benchmark.git
+git clone --recurse-submodules git@github.com:pddshk/stl-benchmark.git
 ```
 
 NB! to run this you need to place `#include <limits>` into cpp/benchmark/src/benchmark_register.h
