@@ -1,5 +1,6 @@
-#include <fstream>
+#include <cstdio>
 #include <iostream>
+
 #include "benchmark/benchmark.h"
 
 struct point {
@@ -7,6 +8,7 @@ struct point {
     float y;
     float z;
 
+    point() = default;
     point(float xp, float yp, float zp) : x(xp), y(yp), z(zp) {}
 };
 
@@ -16,46 +18,38 @@ struct triangle {
     point v2;
     point v3;
 
+
+    triangle() = default;
     triangle(point normalp, point v1p, point v2p, point v3p) :
             normal(normalp), v1(v1p), v2(v2p), v3(v3p) {}
 };
 
-std::vector<triangle> parse_stl(const std::string &stl_path) {
-    std::ifstream stl_file(stl_path.c_str(), std::ios::in | std::ios::binary);
+std::vector<triangle> parse_stl(const char* stl_path) {
+    using std::fread;
+    auto std_file = std::fopen(stl_path, "rb");
+    
+    char dummy[80];
+    fread(dummy, 1, 80, std_file);
 
-    // skip header
-    char header_info[80];
-    stl_file.read(header_info, 80);
+    std::uint32_t n_triangles;
+    fread(&n_triangles, 4, 1, std_file);
 
-    char n_triangles[4];
-    stl_file.read(n_triangles, 4);
-    auto *r = (unsigned int *) n_triangles;
-    unsigned int num_triangles = *r;
-
-    std::vector<triangle> triangles;
-    triangles.reserve(num_triangles);
-
-    for (unsigned int i = 0; i < num_triangles; i++) {
-        float fs[12];
-        stl_file.read((char *) fs, 48);
-        point normal{fs[0], fs[1], fs[2]};
-        point v1{fs[3], fs[4], fs[5]};
-        point v2{fs[6], fs[7], fs[8]};
-        point v3{fs[9], fs[10], fs[11]};
-        triangles.emplace_back(normal, v1, v2, v3);
-
-        // skip attribute byte count
+    std::vector<triangle> triangles(n_triangles);
+    
+    for (auto& tr : triangles){
+    	fread(&tr, 48, 1, std_file);
         char dummy[2];
-        stl_file.read(dummy, 2);
+        fread(dummy, 1, 2, std_file);
     }
-
-    assert(stl_file.peek() == EOF);
-
+    
+    std::fclose(std_file);
+    
     return triangles;
 }
 
+constexpr auto stl = "nist.stl";
+
 static void ParseStl(benchmark::State& state) {
-    std::string stl = "nist.stl";
     for (auto _ : state) {
         parse_stl(stl);
     }

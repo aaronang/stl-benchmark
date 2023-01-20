@@ -7,31 +7,37 @@ For more information: [STL Benchmark Comparison: C++ vs. Julia](https://aaronang
 ## Getting Started
 
 ```console
-$ git clone --recurse-submodules git@github.com:aaronang/stl-benchmark.git
+git clone --recurse-submodules git@github.com:pddshk/stl-benchmark.git
 ```
+
+NB! to run this you need to place `#include <limits>` into cpp/benchmark/src/benchmark_register.h
 
 From the `cpp` directory:
 
 ```console
-$ export CC=/usr/bin/clang
-$ export CXX=/usr/bin/clang++
-$ mkdir build
-$ cd build
-$ cmake -DCMAKE_BUILD_TYPE=Release ..
-$ make -j
-$ ./stl_benchmark
-2018-10-06 12:35:31
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+make -j
+./stl_benchmark
+```
+
+Sample output
+
+```console
 Running ./stl_benchmark
-Run on (8 X 2300 MHz CPU s)
+Run on (12 X 4500 MHz CPU s)
 CPU Caches:
-  L1 Data 32K (x4)
-  L1 Instruction 32K (x4)
-  L2 Unified 262K (x4)
-  L3 Unified 6291K (x1)
+  L1 Data 32K (x6)
+  L1 Instruction 32K (x6)
+  L2 Unified 256K (x6)
+  L3 Unified 12288K (x1)
 --------------------------------------------------
 Benchmark           Time           CPU Iterations
 --------------------------------------------------
-ParseStl       429234 ns     409210 ns       1729
+ParseStl       237056 ns     236744 ns       2912
 ```
 
 From the `julia` directory:
@@ -39,19 +45,18 @@ From the `julia` directory:
 ```console
 $ julia -O3
 julia> ]
-(v1.0) pkg> activate .
-(benchmark) pkg> ^C
+(v1.6) pkg> add BenchmarkTools
 julia> using BenchmarkTools
 julia> include("stl.jl")
 julia> @btime STL.parse("nist.stl")
-  211.641 μs (9 allocations: 347.06 KiB)
+  110.646 μs (14 allocations: 347.30 KiB)
 ```
 
 From the `python` directory:
 
 ```console
 $ python benchmark.py
-25150.930999999986 μs
+13513.513993530069 μs μs
 ```
 
 > Note: Python 3.7.0 is required.
@@ -60,11 +65,6 @@ $ python benchmark.py
 
 | Language | Time       |
 |----------|------------|
-| C++      | 409.210 μs |
-| Julia    | 211.641 μs |
-| Python   | 25150.9 μs |
-
-## Disclaimer
-
-I am neither a C++ nor Julia expert. Please let me know if I biased the results
-by implementing something obviously inefficiently.
+| C++      | 237.056 μs |
+| Julia    | 110.646 μs |
+| Python   | 13513.5 μs |
